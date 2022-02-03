@@ -36,7 +36,7 @@ export default class RestaurantsDAO {
 
         try {
             cursor = await restaurants
-                .find
+                .find(query)
         } catch (error) {
             console.error(`Unable to issue find command, ${error}`);
             return { restaurantsList: [], totalNumRestaurants: 0 }
@@ -48,11 +48,10 @@ export default class RestaurantsDAO {
             const restaurantsList = await displayCursor.toArray()
             const totalNumRestaurants = await restaurants.countDocuments(query)
 
-            return { restaurantsList: [], totalNumRestaurants: 0 }
+            return { restaurantsList, totalNumRestaurants }
         } catch (error) {
             console.error(`Unable to convert cursor to array or problem counting documents, ${error}`);
-            return { restaurantsList: [], totalNumRestaurants: 0}
+            return { restaurantsList: [], totalNumRestaurants: 0 }
         }
     }
 }
-https://www.youtube.com/watch?v=mrHNSanmqQ4&t=1891s
