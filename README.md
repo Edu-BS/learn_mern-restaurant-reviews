@@ -16,3 +16,7 @@ npm install bootstrap
 npm install react-router-dom
 ```
 
+# Future improvements
+
+- Add pagination in the restaurants-list.jsx
+- Combine the queries of restaurants-list.jsx
