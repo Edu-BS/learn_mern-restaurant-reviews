@@ -48,7 +48,9 @@ function App() {
 
       <div className='container mt-3'>
         <Routes>
-          <Route path={["/", "/restaurants"]} element={RestaurantList} />
+          {/* In react-router-dom v6 you can't use {["/", "/restaurants"]} */}
+          <Route exact path="/" element={<RestaurantList />} />
+          <Route exact path="/restaurants" element={<RestaurantList />} />
           <Route
             path="/restaurants/:id/review"
             render={(props) => (
