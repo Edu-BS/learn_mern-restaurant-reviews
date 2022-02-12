@@ -3,8 +3,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import AddReview from './components/add-review.jsx';
-import RestaurantList from './components/restaurant-list.jsx';
-import Restaurants from './components/restaurants.jsx';
+import RestaurantsList from './components/restaurant-list.jsx';
+import Restaurant from './components/restaurants.jsx';
 import Login from './components/login.jsx';
 
 function App() {
@@ -49,8 +49,8 @@ function App() {
       <div className='container mt-3'>
         <Routes>
           {/* In react-router-dom v6 you can't use {["/", "/restaurants"]} */}
-          <Route exact path="/" element={<RestaurantList />} />
-          <Route exact path="/restaurants" element={<RestaurantList />} />
+          <Route exact path="/" element={<RestaurantsList />} />
+          <Route exact path="/restaurants" element={<RestaurantsList />} />
           <Route
             path="/restaurants/:id/review"
             render={(props) => (
@@ -59,15 +59,15 @@ function App() {
           />
           <Route
             path="/restaurants/:id"
-            render={(props) => (
-              <Restaurants {...props} user={user} />
-            )}
+
+            element={<Restaurant user={user} />}
           />
           <Route
             path="/login"
-            render={(props) => (
-              <Login {...props} login={login} />
-            )}
+            // render={(props) => (
+            //   <Login {...props} login={login} />
+            // )}
+            element={<Login login={login} />}
           />
         </Routes>
       </div>

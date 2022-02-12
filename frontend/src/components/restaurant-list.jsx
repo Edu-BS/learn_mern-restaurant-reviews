@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import RestaurantDataService from "../services/restaurant"
 import { Link } from 'react-router-dom';
 
-const RestaurantList = props => {
-  const [restaurants, setRestaurnats] = useState([]);
+const RestaurantsList = props => {
+  const [restaurants, setRestaurants] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [searchZip, setSearchZip] = useState("");
   const [searchCuisine, setSearchCuisine] = useState("");
@@ -11,7 +11,7 @@ const RestaurantList = props => {
 
   useEffect(() => {
     retrieveRestaurants();
-    retrieveCuisine();
+    retrieveCuisines();
   }, []);
 
   const onChangeSearchName = e => {
@@ -33,14 +33,14 @@ const RestaurantList = props => {
     RestaurantDataService.getAll()
       .then(res => {
         console.log(res.data);
-        setRestaurnats(res.data.restaurants)
+        setRestaurants(res.data.restaurants)
       })
       .catch(err => {
         console.log(err);
       })
   }
 
-  const retrieveCuisine = () => {
+  const retrieveCuisines = () => {
     RestaurantDataService.getCuisines()
       .then(res => {
         console.log(res.data);
@@ -59,7 +59,7 @@ const RestaurantList = props => {
     RestaurantDataService.find(query, by)
       .then(res => {
         console.log(res.data);
-        setRestaurnats(res.data.restaurants)
+        setRestaurants(res.data.restaurants)
       })
       .catch(err => {
         console.log(err);
@@ -141,10 +141,10 @@ const RestaurantList = props => {
         </div>
       </div>
       <div className="row">
-        {restaurants.map((restaurant) => {
+        {restaurants.map((restaurant, index) => {
           const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
           return (
-            <div className="col-lg-4 pb-1">
+            <div className="col-lg-4 pb-1" key={index}>
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">{restaurant.name}</h5>
@@ -170,4 +170,4 @@ const RestaurantList = props => {
   );
 }
 
-export default RestaurantList;
+export default RestaurantsList;
